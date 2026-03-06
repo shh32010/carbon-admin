@@ -1,0 +1,78 @@
+# ===================== 核心编译/打包产物 =====================
+# Vue CLI/Webpack 构建产物
+dist/
+build/
+# Vite 构建产物
+dist/
+.vite/
+# 临时编译文件
+*.js.map
+*.css.map
+
+# ===================== 依赖包 =====================
+# npm/yarn/pnpm 依赖
+node_modules/
+
+# ===================== IDE/编辑器配置 =====================
+# VSCode
+.vscode/
+*.code-workspace
+# IntelliJ IDEA/WebStorm
+.idea/
+*.iml
+*.iws
+*.ipr
+# Eclipse
+.classpath
+.project
+.settings/
+# Sublime
+*.sublime-*
+# Vim
+*.swp
+*.swo
+# macOS/Windows 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===================== 环境配置/敏感文件 =====================
+# 环境变量文件（包含密钥、数据库配置等）
+.env
+.env.*
+!.env.example  # 保留示例文件，排除实际环境文件
+# 本地配置文件
+vue.config.js.local
+vite.config.js.local
+# 私钥/证书
+*.pem
+*.key
+*.crt
+
+# ===================== 日志/缓存文件 =====================
+# 日志文件
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+# 缓存文件
+.cache/
+.eslintcache
+# 测试/覆盖率报告
+coverage/
+test-results/
+# 临时文件
+tmp/
+temp/
+
+# ===================== 其他无用文件 =====================
+# 打包压缩文件
+*.zip
+*.tar.gz
+*.rar
+# IDE 运行配置
+run/
+# TypeScript 编译声明（若项目用TS，需保留dist/types则删除此行）
+types/
+*.d.ts.bak
