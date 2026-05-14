@@ -2,286 +2,367 @@
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="90px">
       <el-form-item label="申请单号" prop="serialNo">
-        <el-input v-model="queryParams.serialNo" placeholder="请输入申请单" clearable  @keyup.enter.native="handleQuery" />
+        <el-input v-model="queryParams.serialNo" placeholder="请输入申请单" clearable @keyup.enter.native="handleQuery" />
       </el-form-item>
       <el-form-item label="业务类型" prop="bizType">
-        <el-select v-model="queryParams.bizType" placeholder="请选择业务类型" clearable filterable >
-          <el-option v-for="dict in bizTypeOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue" />
+        <el-select v-model="queryParams.bizType" placeholder="请选择业务类型" clearable filterable>
+          <el-option v-for="dict in bizTypeOptions" :key="dict.dictValue" :label="dict.dictLabel"
+            :value="dict.dictValue" />
         </el-select>
       </el-form-item>
       <el-form-item label="供应商" prop="supplierId">
-        <el-select v-model="queryParams.supplierId" placeholder="请选择供应商" clearable filterable >
-          <el-option v-for="dict in supplierIdOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue" />
+        <el-select v-model="queryParams.supplierId" placeholder="请选择供应商" clearable filterable>
+          <el-option v-for="dict in supplierIdOptions" :key="dict.dictValue" :label="dict.dictLabel"
+            :value="dict.dictValue" />
         </el-select>
       </el-form-item>
       <el-form-item label="合同类型" prop="contractType">
-        <el-select v-model="queryParams.contractType" placeholder="请选择合同类型" clearable filterable >
-          <el-option v-for="dict in contractTypeOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue" />
+        <el-select v-model="queryParams.contractType" placeholder="请选择合同类型" clearable filterable>
+          <el-option v-for="dict in contractTypeOptions" :key="dict.dictValue" :label="dict.dictLabel"
+            :value="dict.dictValue" />
         </el-select>
       </el-form-item>
       <el-form-item label="入库状态" prop="billStatus">
-        <el-select v-model="queryParams.billStatus" placeholder="请选择入库状态" clearable filterable >
-          <el-option v-for="dict in billStatusOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue" />
+        <el-select v-model="queryParams.billStatus" placeholder="请选择入库状态" clearable filterable>
+          <el-option v-for="dict in billStatusOptions" :key="dict.dictValue" :label="dict.dictLabel"
+            :value="dict.dictValue" />
         </el-select>
       </el-form-item>
       <el-form-item label="申请人" prop="applyUser">
-        <el-select v-model="queryParams.applyUser" placeholder="请选择申请人" clearable filterable >
-          <el-option v-for="dict in applyUserOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue" />
+        <el-select v-model="queryParams.applyUser" placeholder="请选择申请人" clearable filterable>
+          <el-option v-for="dict in applyUserOptions" :key="dict.dictValue" :label="dict.dictLabel"
+            :value="dict.dictValue" />
         </el-select>
       </el-form-item>
       <el-form-item label="申请日期" prop="applyTime">
-        <el-date-picker v-model="daterangeApplyTime"  style="width: 240px" value-format="yyyy-MM-dd" type="daterange" range-separator="-" start-placeholder="开始日期" end-placeholder="结束日期"></el-date-picker>
+        <el-date-picker v-model="daterangeApplyTime" style="width: 240px" value-format="yyyy-MM-dd" type="daterange"
+          range-separator="-" start-placeholder="开始日期" end-placeholder="结束日期"></el-date-picker>
       </el-form-item>
       <el-form-item label="申请状态" prop="applyStatus">
-        <el-select v-model="queryParams.applyStatus" placeholder="请选择申请状态" clearable filterable >
-          <el-option v-for="dict in applyStatusOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue" />
+        <el-select v-model="queryParams.applyStatus" placeholder="请选择申请状态" clearable filterable>
+          <el-option v-for="dict in applyStatusOptions" :key="dict.dictValue" :label="dict.dictLabel"
+            :value="dict.dictValue" />
         </el-select>
       </el-form-item>
       <el-form-item label="审核人" prop="auditUser">
-        <el-select v-model="queryParams.auditUser" placeholder="请选择审核人" clearable filterable >
-          <el-option v-for="dict in auditUserOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue" />
+        <el-select v-model="queryParams.auditUser" placeholder="请选择审核人" clearable filterable>
+          <el-option v-for="dict in auditUserOptions" :key="dict.dictValue" :label="dict.dictLabel"
+            :value="dict.dictValue" />
         </el-select>
       </el-form-item>
       <el-form-item label="审核日期" prop="auditTime">
-        <el-date-picker v-model="daterangeAuditTime"  style="width: 240px" value-format="yyyy-MM-dd" type="daterange" range-separator="-" start-placeholder="开始日期" end-placeholder="结束日期"></el-date-picker>
+        <el-date-picker v-model="daterangeAuditTime" style="width: 240px" value-format="yyyy-MM-dd" type="daterange"
+          range-separator="-" start-placeholder="开始日期" end-placeholder="结束日期"></el-date-picker>
       </el-form-item>
       <el-form-item label="审核状态" prop="auditStatus">
-        <el-select v-model="queryParams.auditStatus" placeholder="请选择审核状态" clearable filterable >
-          <el-option v-for="dict in auditStatusOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue" />
+        <el-select v-model="queryParams.auditStatus" placeholder="请选择审核状态" clearable filterable>
+          <el-option v-for="dict in auditStatusOptions" :key="dict.dictValue" :label="dict.dictLabel"
+            :value="dict.dictValue" />
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button  type="primary"   @click="handleQuery">搜索</el-button>
-        <el-button    @click="resetQuery">重置</el-button>
+        <el-button type="primary" @click="handleQuery">搜索</el-button>
+        <el-button @click="resetQuery">重置</el-button>
       </el-form-item>
     </el-form>
 
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
-        <el-button  type="primary" plain   @click="handleAdd" v-hasPermi="['wmsApply:inWarahouseApply:add']">新增</el-button>
+        <el-button type="primary" plain @click="handleAdd" v-hasPermi="['wmsApply:inWarahouseApply:add']">新增</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button  type="success" plain   :disabled="single" @click="handleUpdate" v-hasPermi="['wmsApply:inWarahouseApply:edit']">修改</el-button>
+        <el-button type="success" plain :disabled="single" @click="handleUpdate"
+          v-hasPermi="['wmsApply:inWarahouseApply:edit']">修改</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button  type="danger" plain   :disabled="multiple" @click="handleDelete" v-hasPermi="['wmsApply:inWarahouseApply:remove']">删除</el-button>
+        <el-button type="danger" plain :disabled="multiple" @click="handleDelete"
+          v-hasPermi="['wmsApply:inWarahouseApply:remove']">删除</el-button>
       </el-col>
 
     </el-row>
 
     <el-table v-loading="loading" :data="inWarahouseApplyList" @selection-change="handleSelectionChange">
-      <el-table-column type="selection"  align="center"/>
-      <el-table-column label="编号" align="center" prop="id"  />
-      <el-table-column label="申请单号" align="center" prop="serialNo"   width="200" />
-      <el-table-column label="关联单据号" align="center" prop="bizBillNo"   width="200" />
-      <el-table-column label="业务类型" align="center" prop="bizType" :formatter="bizTypeFormat"  width="200" />
-      <el-table-column label="供应商" align="center" prop="supplierId" :formatter="supplierIdFormat"  width="200" />
-      <el-table-column label="合同号" align="center" prop="contractNo"  width="200" />
-      <el-table-column label="合同类型" align="center" prop="contractType" :formatter="contractTypeFormat"  width="200" />
-      <el-table-column label="单据状态" align="center" prop="billStatus" :formatter="billStatusFormat"  width="200" />
-      <el-table-column label="申请类型" align="center" prop="applyType" :formatter="applyTypeFormat"  width="200" />
-      <el-table-column label="申请人" align="center" prop="applyUser" :formatter="applyUserFormat"  width="200" />
-      <el-table-column label="申请日期" align="center" prop="applyTime"  width="200" >
+      <el-table-column type="selection" align="center" />
+      <el-table-column label="编号" align="center" prop="id" />
+      <el-table-column label="申请单号" align="center" prop="serialNo" width="200" />
+      <el-table-column label="关联单据号" align="center" prop="bizBillNo" width="200" />
+      <el-table-column label="业务类型" align="center" prop="bizType" :formatter="bizTypeFormat" width="200" />
+      <el-table-column label="供应商" align="center" prop="supplierId" :formatter="supplierIdFormat" width="200" />
+      <el-table-column label="合同号" align="center" prop="contractNo" width="200" />
+      <el-table-column label="合同类型" align="center" prop="contractType" :formatter="contractTypeFormat" width="200" />
+      <el-table-column label="单据状态" align="center" prop="billStatus" :formatter="billStatusFormat" width="200" />
+      <el-table-column label="申请类型" align="center" prop="applyType" :formatter="applyTypeFormat" width="200" />
+      <el-table-column label="申请人" align="center" prop="applyUser" :formatter="applyUserFormat" width="200" />
+      <el-table-column label="申请日期" align="center" prop="applyTime" width="200">
         <template #default="scope">
           <span>{{ parseTime(scope.row.applyTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="申请状态" align="center" prop="applyStatus" :formatter="applyStatusFormat"  width="200" />
-      <el-table-column label="审核人" align="center" prop="auditUser" :formatter="auditUserFormat"  width="200" />
-      <el-table-column label="审核日期" align="center" prop="auditTime"  width="200" >
+      <el-table-column label="申请状态" align="center" prop="applyStatus" :formatter="applyStatusFormat" width="200" />
+      <el-table-column label="审核人" align="center" prop="auditUser" :formatter="auditUserFormat" width="200" />
+      <el-table-column label="审核日期" align="center" prop="auditTime" width="200">
         <template #default="scope">
           <span>{{ parseTime(scope.row.auditTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="审核状态" align="center" prop="auditStatus" :formatter="auditStatusFormat"  width="200" />
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width" width="200" >
+      <el-table-column label="审核状态" align="center" prop="auditStatus" :formatter="auditStatusFormat" width="200" />
+      <el-table-column label="操作" align="center" class-name="small-padding fixed-width" width="200">
         <template #default="scope">
-          <el-button  v-if="scope.row.auditStatus=='1'&&scope.row.billStatus!='1'" text @click="handleInWarehouse(scope.row)" v-hasPermi="['wmsApply:inWarahouseApply:edit']">入库</el-button>
-          <el-button  text  @click="handleUpdate(scope.row)" v-hasPermi="['wmsApply:inWarahouseApply:edit']">修改</el-button>
-          <el-button  v-if="scope.row.auditStatus!='1'&&scope.row.applyStatus!='1'" text  @click="handleDelete(scope.row)" v-hasPermi="['wmsApply:inWarahouseApply:remove']">删除</el-button>
+          <el-button v-if="scope.row.auditStatus == '1' && scope.row.billStatus != '1'" type="text"
+            icon="el-icon-caret-right" @click="handleInWarehouse(scope.row)"
+            v-hasPermi="['wmsApply:inWarahouseApply:edit']">入库</el-button>
+          <el-button type="text" @click="handleUpdate(scope.row)"
+            v-hasPermi="['wmsApply:inWarahouseApply:edit']">修改</el-button>
+          <el-button v-if="scope.row.auditStatus != '1' && scope.row.applyStatus != '1'" type="text"
+            @click="handleDelete(scope.row)" v-hasPermi="['wmsApply:inWarahouseApply:remove']">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
 
-    <pagination v-show="total>0" :total="total" v-model:page="queryParams.pageNum" v-model:limit="queryParams.pageSize" @pagination="getList" />
+    <pagination v-show="total > 0" :total="total" v-model:page="queryParams.pageNum"
+      v-model:limit="queryParams.pageSize" @pagination="getList" />
 
     <!-- 添加或修改入库申请对话框 -->
-    <el-dialog :title="title" v-model="open" width="1000px" append-to-body>
+    <el-dialog :title="title" :model-value="open" width="1000px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="95px" :inline="true">
         <el-form-item label="申请单号" prop="serialNo">
           <el-input v-model="form.serialNo" disabled />
         </el-form-item>
+
+
         <el-form-item label="关联单据号" prop="bizBillNo">
           <el-input v-model="form.bizBillNo" disabled>
-            <template #append><el-button  slot="append" @click="handleSelectBiz" :disabled="form.auditStatus!='1'&&form.applyStatus!='1'?false:true">选择</el-button></template>
+            <template #append><el-button slot="append" @click="handleSelectBiz"
+                :disabled="form.auditStatus != '1' && form.applyStatus != '1' ? false : true">选择</el-button></template>
           </el-input>
         </el-form-item>
+
+
         <el-form-item label="业务类型" prop="bizType">
-          <el-select v-model="form.bizType" placeholder="请选择业务类型" clearable filterable :disabled="form.auditStatus!='1'&&form.applyStatus!='1'?false:true">
-            <el-option v-for="dict in bizTypeOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue"></el-option>
+          <el-select v-model="form.bizType" placeholder="请选择业务类型" clearable filterable
+            :disabled="form.auditStatus != '1' && form.applyStatus != '1' ? false : true">
+            <el-option v-for="dict in bizTypeOptions" :key="dict.dictValue" :label="dict.dictLabel"
+              :value="dict.dictValue"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item v-if="form.bizType=='2'" label="供应商" prop="supplierId">
-          <el-select v-model="form.supplierId" placeholder="请选择供应商" clearable filterable :disabled="form.auditStatus!='1'&&form.applyStatus!='1'?false:true">
-            <el-option v-for="dict in supplierIdOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="parseInt(dict.dictValue)"></el-option>
+
+
+        <el-form-item v-if="form.bizType == '2'" label="供应商" prop="supplierId">
+          <el-select v-model="form.supplierId" placeholder="请选择供应商" clearable filterable
+            :disabled="form.auditStatus != '1' && form.applyStatus != '1' ? false : true">
+            <el-option v-for="dict in supplierIdOptions" :key="dict.dictValue" :label="dict.dictLabel"
+              :value="parseInt(dict.dictValue)"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item v-if="form.bizType!='1'" label="合同号" prop="contractNo">
+
+        <el-form-item v-if="form.bizType != '1'" label="合同号" prop="contractNo">
           <el-input v-model="form.contractNo" disabled />
         </el-form-item>
-        <el-form-item v-if="form.bizType!='1'" label="合同类型" prop="contractType">
+
+        <el-form-item v-if="form.bizType != '1'" label="合同类型" prop="contractType">
           <el-select v-model="form.contractType" placeholder="" disabled>
-            <el-option v-for="dict in contractTypeOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue"></el-option>
+            <el-option v-for="dict in contractTypeOptions" :key="dict.dictValue" :label="dict.dictLabel"
+              :value="dict.dictValue"></el-option>
           </el-select>
         </el-form-item>
+
+
+
         <el-form-item label="申请类型" prop="applyType">
           <el-select v-model="form.applyType" placeholder="" disabled>
-            <el-option v-for="dict in applyTypeOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue"></el-option>
+            <el-option v-for="dict in applyTypeOptions" :key="dict.dictValue" :label="dict.dictLabel"
+              :value="dict.dictValue"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="申请人" prop="applyUser">
           <el-select v-model="form.applyUser" placeholder="" disabled>
-            <el-option v-for="dict in applyUserOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue"></el-option>
+            <el-option v-for="dict in applyUserOptions" :key="dict.dictValue" :label="dict.dictLabel"
+              :value="dict.dictValue"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="申请日期" prop="applyTime">
-          <el-date-picker  v-model="form.applyTime" type="datetime" value-format="yyyy-MM-dd HH:mm:ss" placeholder="" disabled>
+          <el-date-picker v-model="form.applyTime" type="datetime" value-format="yyyy-MM-dd HH:mm:ss" placeholder=""
+            disabled>
           </el-date-picker>
         </el-form-item>
         <el-form-item label="申请状态" prop="applyStatus">
           <el-select v-model="form.applyStatus" placeholder="" disabled>
-            <el-option v-for="dict in applyStatusOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue"></el-option>
+            <el-option v-for="dict in applyStatusOptions" :key="dict.dictValue" :label="dict.dictLabel"
+              :value="dict.dictValue"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="审核人" prop="auditUser">
           <el-select v-model="form.auditUser" placeholder="" disabled>
-            <el-option v-for="dict in auditUserOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue"></el-option>
+            <el-option v-for="dict in auditUserOptions" :key="dict.dictValue" :label="dict.dictLabel"
+              :value="dict.dictValue"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="审核日期" prop="auditTime">
-          <el-date-picker  v-model="form.auditTime" type="datetime" value-format="yyyy-MM-dd HH:mm:ss" placeholder="" disabled>
+          <el-date-picker v-model="form.auditTime" type="datetime" value-format="yyyy-MM-dd HH:mm:ss" placeholder=""
+            disabled>
           </el-date-picker>
         </el-form-item>
         <el-form-item label="审核状态" prop="auditStatus">
           <el-select v-model="form.auditStatus" placeholder="" disabled>
-            <el-option v-for="dict in auditStatusOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue"></el-option>
+            <el-option v-for="dict in auditStatusOptions" :key="dict.dictValue" :label="dict.dictLabel"
+              :value="dict.dictValue"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="审核意见" prop="auditComment">
           <el-input v-model="form.auditComment" type="textarea" disabled />
         </el-form-item>
         <el-form-item label="备注" prop="remark">
-          <el-input v-model="form.remark" type="textarea" placeholder="请输入内容" :disabled="form.auditStatus!='1'&&form.applyStatus!='1'?false:true" />
+          <el-input v-model="form.remark" type="textarea" placeholder="请输入内容"
+            :disabled="form.auditStatus != '1' && form.applyStatus != '1' ? false : true" />
         </el-form-item>
+
         <el-divider content-position="center">入库申请明细信息</el-divider>
-        <el-table :data="wmsInWarehouseApplyDetailList" :row-class-name="rowWmsInWarehouseApplyDetailIndex" @selection-change="handleWmsInWarehouseApplyDetailSelectionChange" ref="wmsInWarehouseApplyDetail">
-          <el-table-column type="selection"  align="center"/>
-          <el-table-column label="序号" align="center" prop="index"   width="200" />
-          <el-table-column label="物料" prop="materialName"  width="200" >
+
+        <el-table :data="wmsInWarehouseApplyDetailList" :row-class-name="rowWmsInWarehouseApplyDetailIndex"
+          @selection-change="handleWmsInWarehouseApplyDetailSelectionChange" ref="wmsInWarehouseApplyDetail" @close="cancel">
+
+          <el-table-column type="selection" align="center" />
+          <el-table-column label="序号" align="center" prop="index" width="200" />
+          <el-table-column label="物料" prop="materialName" width="200">
             <template #default="scope">
-              <el-form-item :prop="'wmsInWarehouseApplyDetailList.'+scope.$index+'.materialName'" :rules="rules.materialName">
+              <el-form-item :prop="'wmsInWarehouseApplyDetailList.' + scope.$index + '.materialName'"
+                :rules="rules.materialName">
                 <el-input v-model="scope.row.materialName" placeholder="" disabled>
                 </el-input>
               </el-form-item>
             </template>
           </el-table-column>
-          <el-table-column label="仓库" prop="warehouseId"  width="200" >
+          <el-table-column label="仓库" prop="warehouseId" width="200">
             <template #default="scope">
-              <el-form-item :prop="'wmsInWarehouseApplyDetailList.'+scope.$index+'.warehouseId'" :rules="rules.warehouseId">
-                <el-select v-model="scope.row.warehouseId" placeholder="请选择仓库" @change="handleWarehouseChange(scope.row.warehouseId,scope.$index)" :disabled="form.auditStatus!='1'&&form.applyStatus!='1'?false:true">
-                  <el-option v-for="dict in warehouseIdOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue"></el-option>
+              <el-form-item :prop="'wmsInWarehouseApplyDetailList.' + scope.$index + '.warehouseId'"
+                :rules="rules.warehouseId">
+                <el-select v-model="scope.row.warehouseId" placeholder="请选择仓库"
+                  @change="handleWarehouseChange(scope.row.warehouseId, scope.$index)"
+                  :disabled="form.auditStatus != '1' && form.applyStatus != '1' ? false : true">
+                  <el-option v-for="dict in warehouseIdOptions" :key="dict.dictValue" :label="dict.dictLabel"
+                    :value="dict.dictValue"></el-option>
                 </el-select>
               </el-form-item>
             </template>
           </el-table-column>
-          <el-table-column label="库区" prop="whRegionId"  width="200" >
+          <el-table-column label="库区" prop="whRegionId" width="200">
             <template #default="scope">
-              <el-form-item :prop="'wmsInWarehouseApplyDetailList.'+scope.$index+'.whRegionId'" :rules="rules.whRegionId">
-                <el-select v-model="scope.row.whRegionId" placeholder="请选择库区" @change="handleWhRegionChange(scope.row.whRegionId,scope.$index)" :disabled="form.auditStatus!='1'&&form.applyStatus!='1'?false:true">
-                  <el-option v-for="dict in scope.row.whRegionOptions" :key="dict.id" :label="dict.name" :value="dict.id" />
+              <el-form-item :prop="'wmsInWarehouseApplyDetailList.' + scope.$index + '.whRegionId'"
+                :rules="rules.whRegionId">
+                <el-select v-model="scope.row.whRegionId" placeholder="请选择库区"
+                  @change="handleWhRegionChange(scope.row.whRegionId, scope.$index)"
+                  :disabled="form.auditStatus != '1' && form.applyStatus != '1' ? false : true">
+                  <el-option v-for="dict in scope.row.whRegionOptions" :key="dict.id" :label="dict.name"
+                    :value="dict.id" />
                 </el-select>
               </el-form-item>
             </template>
           </el-table-column>
-          <el-table-column label="库位" prop="whLocationId"  width="200" >
+          <el-table-column label="库位" prop="whLocationId" width="200">
             <template #default="scope">
-              <el-form-item :prop="'wmsInWarehouseApplyDetailList.'+scope.$index+'.whLocationId'" :rules="rules.whLocationId">
-                <el-select v-model="scope.row.whLocationId" placeholder="请选择库位" :disabled="form.auditStatus!='1'&&form.applyStatus!='1'?false:true">
-                  <el-option v-for="dict in scope.row.whLocationOptions" :key="dict.id" :label="dict.name" :value="dict.id" />
+              <el-form-item :prop="'wmsInWarehouseApplyDetailList.' + scope.$index + '.whLocationId'"
+                :rules="rules.whLocationId">
+                <el-select v-model="scope.row.whLocationId" placeholder="请选择库位"
+                  :disabled="form.auditStatus != '1' && form.applyStatus != '1' ? false : true">
+                  <el-option v-for="dict in scope.row.whLocationOptions" :key="dict.id" :label="dict.name"
+                    :value="dict.id" />
                 </el-select>
               </el-form-item>
             </template>
           </el-table-column>
-          <el-table-column :label="form.bizType=='5'?'发货数量':'到货数量'" prop="totalQuantity"  width="200" >
+          <el-table-column :label="form.bizType == '5' ? '发货数量' : '到货数量'" prop="totalQuantity" width="200">
             <template #default="scope">
-              <el-form-item :prop="'wmsInWarehouseApplyDetailList.'+scope.$index+'.totalQuantity'" :rules="rules.totalQuantity">
+              <el-form-item :prop="'wmsInWarehouseApplyDetailList.' + scope.$index + '.totalQuantity'"
+                :rules="rules.totalQuantity">
                 <el-input v-model.number="scope.row.totalQuantity" placeholder="" disabled />
               </el-form-item>
             </template>
           </el-table-column>
-          <el-table-column label="入库数量" prop="inQuantity"  width="200" >
+          <el-table-column label="入库数量" prop="inQuantity" width="200">
             <template #default="scope">
-              <el-form-item :prop="'wmsInWarehouseApplyDetailList.'+scope.$index+'.inQuantity'" :rules="rules.inQuantity">
+              <el-form-item :prop="'wmsInWarehouseApplyDetailList.' + scope.$index + '.inQuantity'"
+                :rules="rules.inQuantity">
                 <el-input v-model.number="scope.row.inQuantity" placeholder="" disabled />
               </el-form-item>
             </template>
           </el-table-column>
-          <el-table-column label="型号" prop="materialModel" width="200" >
+          <el-table-column label="型号" prop="materialModel" width="200">
           </el-table-column>
-          <el-table-column label="规格" prop="materialSpecification" width="200" >
+          <el-table-column label="规格" prop="materialSpecification" width="200">
           </el-table-column>
-          <el-table-column label="单位" prop="materialUnit" width="200" >
+          <el-table-column label="单位" prop="materialUnit" width="200">
           </el-table-column>
-          <el-table-column label="生产批号" prop="batchNo"  width="200" >
+          <el-table-column label="生产批号" prop="batchNo" width="200">
             <template #default="scope">
-              <el-form-item :prop="'wmsInWarehouseApplyDetailList.'+scope.$index+'.batchNo'" :rules="rules.batchNo">
-                <el-input v-model="scope.row.batchNo" placeholder="请输入生产批号" :disabled="form.auditStatus!='1'&&form.applyStatus!='1'?false:true" />
+              <el-form-item :prop="'wmsInWarehouseApplyDetailList.' + scope.$index + '.batchNo'" :rules="rules.batchNo">
+                <el-input v-model="scope.row.batchNo" placeholder="请输入生产批号"
+                  :disabled="form.auditStatus != '1' && form.applyStatus != '1' ? false : true" />
               </el-form-item>
             </template>
           </el-table-column>
-          <el-table-column label="生产日期" prop="productDate"  width="200" >
+          <el-table-column label="生产日期" prop="productDate" width="200">
             <template #default="scope">
-              <el-form-item :prop="'wmsInWarehouseApplyDetailList.'+scope.$index+'.productDate'" :rules="rules.productDate">
-                <el-date-picker clearable v-model="scope.row.productDate" type="date" value-format="yyyy-MM-dd" placeholder="请选择生产日期" :disabled="form.auditStatus!='1'&&form.applyStatus!='1'?false:true" />
+              <el-form-item :prop="'wmsInWarehouseApplyDetailList.' + scope.$index + '.productDate'"
+                :rules="rules.productDate">
+                <el-date-picker clearable v-model="scope.row.productDate" type="date" value-format="yyyy-MM-dd"
+                  placeholder="请选择生产日期" :disabled="form.auditStatus != '1' && form.applyStatus != '1' ? false : true" />
               </el-form-item>
             </template>
           </el-table-column>
-          <el-table-column label="生产单位" prop="manufacturer"  width="200" >
+          <el-table-column label="生产单位" prop="manufacturer" width="200">
             <template #default="scope">
-              <el-form-item :prop="'wmsInWarehouseApplyDetailList.'+scope.$index+'.manufacturer'" :rules="rules.manufacturer">
-                <el-input v-model="scope.row.manufacturer" placeholder="请输入生产单位" :disabled="form.auditStatus!='1'&&form.applyStatus!='1'?false:true" />
+              <el-form-item :prop="'wmsInWarehouseApplyDetailList.' + scope.$index + '.manufacturer'"
+                :rules="rules.manufacturer">
+                <el-input v-model="scope.row.manufacturer" placeholder="请输入生产单位"
+                  :disabled="form.auditStatus != '1' && form.applyStatus != '1' ? false : true" />
               </el-form-item>
             </template>
           </el-table-column>
         </el-table>
       </el-form>
       <template #footer class="dialog-footer">
-        <el-button  v-if="form.auditStatus!='1'&&form.applyStatus!='1'" type="primary" @click="saveForm">保 存</el-button>
-        <el-button  v-if="form.auditStatus!='1'&&form.applyStatus!='1'" type="warning" @click="submitForm">提 交</el-button>
-        <el-button  @click="cancel">取 消</el-button>
+        <el-button v-if="form.auditStatus != '1' && form.applyStatus != '1'" type="primary" @click="saveForm">保
+          存</el-button>
+        <el-button v-if="form.auditStatus != '1' && form.applyStatus != '1'" type="warning" @click="submitForm">提
+          交</el-button>
+        <el-button @click="cancel">取 消</el-button>
       </template>
     </el-dialog>
+
+
     <!--选择物料档案-->
-    <MaterialSelect :open="materialSelectOpen" @onCancel="handleMaterialCancel" @onSelected="handleMaterialSelected"></MaterialSelect>
+    <MaterialSelect :open="materialSelectOpen" @onCancel="handleMaterialCancel" @onSelected="handleMaterialSelected">
+    </MaterialSelect>
+
     <!--选择采购到货单-->
-    <ArriveSelect :open="arriveSelectOpen" @onArriveCancel="handleArriveCancel" @onArriveSelected="handleArriveSelected"></ArriveSelect>
+    <ArriveSelect :open="arriveSelectOpen" @onArriveCancel="handleArriveCancel"
+      @onArriveSelected="handleArriveSelected">
+    </ArriveSelect>
+
     <!--选择销售退货单-->
-    <ReturnSelect :open="returnSelectOpen" @onReturnCancel="handleReturnCancel" @onReturnSelected="handleReturnSelected"></ReturnSelect>
+    <ReturnSelect :open="returnSelectOpen" @onReturnCancel="handleReturnCancel"
+      @onReturnSelected="handleReturnSelected">
+    </ReturnSelect>
+
     <!--选择生产完工单-->
-    <ProductFinishSelect status="3" :open="finishSelectOpen" @onCancel="handleFinishCancel" @onSelected="handleFinishSelected"></ProductFinishSelect>
+    <ProductFinishSelect status="3" :open="finishSelectOpen" @onCancel="handleFinishCancel"
+      @onSelected="handleFinishSelected"></ProductFinishSelect>
   </div>
 </template>
 
 <script>
 import { listInWarahouseApply, getInWarahouseApply, delInWarahouseApply, addInWarahouseApply, updateInWarahouseApply, exportInWarahouseApply, submitInWarahouseApply, inWarehouse } from "@/api/wmsApply/inWarahouseApply";
-import MaterialSelect from "@/components/Material/MaterialSelect";
 import { listWarehouseRegion } from "@/api/warehouse/warehouseRegion";
 import { listWarehouseLocation } from "@/api/warehouse/warehouseLocation";
-import ArriveSelect from "@/components/Purchase/ArriveSelect";
 import { getArrive } from "@/api/purchase/arrive";
-import ReturnSelect from "@/components/Sale/ReturnSelect.vue";
 import { getReturn } from "@/api/sale/return";
+
 import ProductFinishSelect from "@/components/product/ProductFinishSelect";
+import MaterialSelect from "@/components/Material/MaterialSelect";
+import ArriveSelect from "@/components/Purchase/ArriveSelect";
+import ReturnSelect from "@/components/Sale/ReturnSelect.vue";
+
+
 export default {
   name: "InWarahouseApply",
   components: {
@@ -387,17 +468,17 @@ export default {
         ],
         totalQuantity: [
           { required: true, message: "到货数量不能为空", trigger: "blur" },
-          { type: 'number',min: 1, max: 65535, message: '到货数量必须为数字值且大小要在1到65535' },
+          { type: 'number', min: 1, max: 65535, message: '到货数量必须为数字值且大小要在1到65535' },
         ],
         inQuantity: [
           { required: true, message: "入库数量不能为空", trigger: "blur" },
-          { type: 'number',min: 1, max: 65535, message: '入库数量必须为数字值且大小要在1到65535' },
+          { type: 'number', min: 1, max: 65535, message: '入库数量必须为数字值且大小要在1到65535' },
         ],
         batchNo: [
           { required: true, message: "生产批号不能为空", trigger: "blur" },
           { max: 20, message: "生产批号最多20个字符", trigger: "blur" }
         ],
-        remark:[
+        remark: [
           { max: 100, message: "备注最多100个字符", trigger: "blur" }
         ],
       }

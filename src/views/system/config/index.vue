@@ -40,8 +40,8 @@
             ></el-date-picker>
          </el-form-item>
          <el-form-item>
-            <el-button type="primary" @click="handleQuery">搜索</el-button>
-            <el-button @click="resetQuery">重置</el-button>
+            <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
+            <el-button icon="Refresh" @click="resetQuery">重置</el-button>
          </el-form-item>
       </el-form>
 
@@ -50,6 +50,7 @@
             <el-button
                type="primary"
                plain
+               icon="Plus"
                @click="handleAdd"
                v-hasPermi="['system:config:add']"
             >新增</el-button>
@@ -58,6 +59,7 @@
             <el-button
                type="success"
                plain
+               icon="Edit"
                :disabled="single"
                @click="handleUpdate"
                v-hasPermi="['system:config:edit']"
@@ -67,6 +69,7 @@
             <el-button
                type="danger"
                plain
+               icon="Delete"
                :disabled="multiple"
                @click="handleDelete"
                v-hasPermi="['system:config:remove']"
@@ -76,6 +79,7 @@
             <el-button
                type="warning"
                plain
+               icon="Download"
                @click="handleExport"
                v-hasPermi="['system:config:export']"
             >导出</el-button>
@@ -84,6 +88,7 @@
             <el-button
                type="danger"
                plain
+               icon="Refresh"
                @click="handleRefreshCache"
                v-hasPermi="['system:config:remove']"
             >刷新缓存</el-button>
@@ -110,8 +115,8 @@
          </el-table-column>
          <el-table-column label="操作" align="center"  class-name="small-padding fixed-width" width="200" >
             <template #default="scope">
-               <el-button link type="primary" @click="handleUpdate(scope.row)" v-hasPermi="['system:config:edit']" >修改</el-button>
-               <el-button link type="primary" @click="handleDelete(scope.row)" v-hasPermi="['system:config:remove']">删除</el-button>
+               <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['system:config:edit']" >修改</el-button>
+               <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['system:config:remove']">删除</el-button>
             </template>
          </el-table-column>
       </el-table>
@@ -125,7 +130,7 @@
       />
 
       <!-- 添加或修改参数配置对话框 -->
-      <el-dialog :title="title" v-model="open" width="500px" append-to-body>
+      <el-dialog :title="title" :model-value="open" width="500px" append-to-body>
          <el-form ref="configRef" :model="form" :rules="rules" label-width="80px">
             <el-form-item label="参数名称" prop="configName">
                <el-input v-model="form.configName" placeholder="请输入参数名称" />

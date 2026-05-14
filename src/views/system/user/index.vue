@@ -73,8 +73,8 @@
                   ></el-date-picker>
                </el-form-item>
                <el-form-item>
-                  <el-button type="primary" @click="handleQuery">搜索</el-button>
-                  <el-button @click="resetQuery">重置</el-button>
+                  <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
+                  <el-button icon="Refresh" @click="resetQuery">重置</el-button>
                </el-form-item>
             </el-form>
 
@@ -83,6 +83,7 @@
                   <el-button
                      type="primary"
                      plain
+                     icon="Plus"
                      @click="handleAdd"
                      v-hasPermi="['system:user:add']"
                   >新增</el-button>
@@ -91,6 +92,7 @@
                   <el-button
                      type="success"
                      plain
+                     icon="Edit"
                      :disabled="single"
                      @click="handleUpdate"
                      v-hasPermi="['system:user:edit']"
@@ -100,6 +102,7 @@
                   <el-button
                      type="danger"
                      plain
+                     icon="Delete"
                      :disabled="multiple"
                      @click="handleDelete"
                      v-hasPermi="['system:user:remove']"
@@ -109,6 +112,7 @@
                   <el-button
                      type="info"
                      plain
+                     icon="Upload"
                      @click="handleImport"
                      v-hasPermi="['system:user:import']"
                   >导入</el-button>
@@ -117,6 +121,7 @@
                   <el-button
                      type="warning"
                      plain
+                     icon="Download"
                      @click="handleExport"
                      v-hasPermi="['system:user:export']"
                   >导出</el-button>
@@ -149,16 +154,16 @@
                <el-table-column label="操作" align="center"  class-name="small-padding fixed-width" width="200" >
                   <template #default="scope">
                      <el-tooltip content="修改" placement="top" v-if="scope.row.userId !== 1">
-                        <el-button link type="primary" @click="handleUpdate(scope.row)" v-hasPermi="['system:user:edit']"></el-button>
+                        <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['system:user:edit']"></el-button>
                      </el-tooltip>
                      <el-tooltip content="删除" placement="top" v-if="scope.row.userId !== 1">
-                        <el-button link type="primary" @click="handleDelete(scope.row)" v-hasPermi="['system:user:remove']"></el-button>
+                        <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['system:user:remove']"></el-button>
                      </el-tooltip>
                      <el-tooltip content="重置密码" placement="top" v-if="scope.row.userId !== 1">
-                         <el-button link type="primary" @click="handleResetPwd(scope.row)" v-hasPermi="['system:user:resetPwd']"></el-button>
+                         <el-button link type="primary" icon="Key" @click="handleResetPwd(scope.row)" v-hasPermi="['system:user:resetPwd']"></el-button>
                      </el-tooltip>
                      <el-tooltip content="分配角色" placement="top" v-if="scope.row.userId !== 1">
-                        <el-button link type="primary" @click="handleAuthRole(scope.row)" v-hasPermi="['system:user:edit']"></el-button>
+                        <el-button link type="primary" icon="CircleCheck" @click="handleAuthRole(scope.row)" v-hasPermi="['system:user:edit']"></el-button>
                      </el-tooltip>
                   </template>
                </el-table-column>
@@ -174,7 +179,7 @@
       </el-row>
 
       <!-- 添加或修改用户配置对话框 -->
-      <el-dialog :title="title" v-model="open" width="600px" append-to-body>
+      <el-dialog :title="title" :model-value="open" width="600px" append-to-body>
          <el-form :model="form" :rules="rules" ref="userRef" label-width="80px">
             <el-row>
                <el-col :span="12">

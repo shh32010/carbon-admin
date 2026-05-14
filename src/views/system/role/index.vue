@@ -45,8 +45,8 @@
             ></el-date-picker>
          </el-form-item>
          <el-form-item>
-            <el-button type="primary" @click="handleQuery">搜索</el-button>
-            <el-button @click="resetQuery">重置</el-button>
+            <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
+            <el-button icon="Refresh" @click="resetQuery">重置</el-button>
          </el-form-item>
       </el-form>
       <el-row :gutter="10" class="mb8">
@@ -54,6 +54,7 @@
             <el-button
                type="primary"
                plain
+               icon="Plus"
                @click="handleAdd"
                v-hasPermi="['system:role:add']"
             >新增</el-button>
@@ -62,6 +63,7 @@
             <el-button
                type="success"
                plain
+               icon="Edit"
                :disabled="single"
                @click="handleUpdate"
                v-hasPermi="['system:role:edit']"
@@ -71,6 +73,7 @@
             <el-button
                type="danger"
                plain
+               icon="Delete"
                :disabled="multiple"
                @click="handleDelete"
                v-hasPermi="['system:role:remove']"
@@ -80,6 +83,7 @@
             <el-button
                type="warning"
                plain
+               icon="Download"
                @click="handleExport"
                v-hasPermi="['system:role:export']"
             >导出</el-button>
@@ -112,16 +116,16 @@
          <el-table-column label="操作" align="center" class-name="small-padding fixed-width" width="200" >
             <template #default="scope">
               <el-tooltip content="修改" placement="top" v-if="scope.row.roleId !== 1">
-                <el-button link type="primary" @click="handleUpdate(scope.row)" v-hasPermi="['system:role:edit']"></el-button>
+                <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['system:role:edit']"></el-button>
               </el-tooltip>
               <el-tooltip content="删除" placement="top" v-if="scope.row.roleId !== 1">
-                <el-button link type="primary" @click="handleDelete(scope.row)" v-hasPermi="['system:role:remove']"></el-button>
+                <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['system:role:remove']"></el-button>
               </el-tooltip>
               <el-tooltip content="数据权限" placement="top" v-if="scope.row.roleId !== 1">
-                <el-button link type="primary" @click="handleDataScope(scope.row)" v-hasPermi="['system:role:edit']"></el-button>
+                <el-button link type="primary" icon="CircleCheck" @click="handleDataScope(scope.row)" v-hasPermi="['system:role:edit']"></el-button>
               </el-tooltip>
               <el-tooltip content="分配用户" placement="top" v-if="scope.row.roleId !== 1">
-                <el-button link type="primary" @click="handleAuthUser(scope.row)" v-hasPermi="['system:role:edit']"></el-button>
+                <el-button link type="primary" icon="User" @click="handleAuthUser(scope.row)" v-hasPermi="['system:role:edit']"></el-button>
               </el-tooltip>
             </template>
          </el-table-column>
@@ -136,7 +140,7 @@
       />
 
       <!-- 添加或修改角色配置对话框 -->
-      <el-dialog :title="title" v-model="open" width="500px" append-to-body>
+      <el-dialog :title="title" :model-value="open" width="500px" append-to-body>
          <el-form ref="roleRef" :model="form" :rules="rules" label-width="100px">
             <el-form-item label="角色名称" prop="roleName">
                <el-input v-model="form.roleName" placeholder="请输入角色名称" />

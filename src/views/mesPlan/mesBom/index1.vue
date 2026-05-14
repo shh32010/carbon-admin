@@ -50,15 +50,11 @@
         <el-form-item label="产品" prop="productName">
           <el-input v-model="form.productName" placeholder="" disabled />
         </el-form-item>
-
-
         <el-form-item label="产品模型" prop="productModelId">
           <el-select v-model="form.productModelId" placeholder="请选择产品模型" clearable filterable @change="handleModelChange">
             <el-option v-for="dict in productIdOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="parseInt(dict.dictValue)"></el-option>
           </el-select>
         </el-form-item>
-
-        
         <el-form-item label="描述">
           <editor v-model="form.description" :min-height="192" />
         </el-form-item>

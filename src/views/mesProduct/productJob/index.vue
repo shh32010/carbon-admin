@@ -2,95 +2,114 @@
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="作业名称" prop="name">
-        <el-input v-model="queryParams.name" placeholder="请输入作业名称" clearable  @keyup.enter.native="handleQuery" />
+        <el-input v-model="queryParams.name" placeholder="请输入作业名称" clearable @keyup.enter.native="handleQuery" />
       </el-form-item>
       <el-form-item label="开始时间">
-        <el-date-picker v-model="daterangeStartTime"  style="width: 240px" value-format="yyyy-MM-dd" type="daterange" range-separator="-" start-placeholder="开始日期" end-placeholder="结束日期"></el-date-picker>
+        <el-date-picker v-model="daterangeStartTime" style="width: 240px" value-format="yyyy-MM-dd" type="daterange"
+          range-separator="-" start-placeholder="开始日期" end-placeholder="结束日期"></el-date-picker>
       </el-form-item>
       <el-form-item label="结束时间">
-        <el-date-picker v-model="daterangeEndTime"  style="width: 240px" value-format="yyyy-MM-dd" type="daterange" range-separator="-" start-placeholder="开始日期" end-placeholder="结束日期"></el-date-picker>
+        <el-date-picker v-model="daterangeEndTime" style="width: 240px" value-format="yyyy-MM-dd" type="daterange"
+          range-separator="-" start-placeholder="开始日期" end-placeholder="结束日期"></el-date-picker>
       </el-form-item>
       <el-form-item label="作业状态" prop="status">
-        <el-select v-model="queryParams.status" placeholder="请选择作业状态" clearable filterable >
-          <el-option v-for="dict in statusOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue" />
+        <el-select v-model="queryParams.status" placeholder="请选择作业状态" clearable filterable>
+          <el-option v-for="dict in statusOptions" :key="dict.dictValue" :label="dict.dictLabel"
+            :value="dict.dictValue" />
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button  type="primary"   @click="handleQuery">搜索</el-button>
-        <el-button    @click="resetQuery">重置</el-button>
+        <el-button type="primary" @click="handleQuery">搜索</el-button>
+        <el-button @click="resetQuery">重置</el-button>
       </el-form-item>
     </el-form>
 
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
-        <el-button  type="primary" plain   @click="handleAdd" v-hasPermi="['mesProduct:productJob:add']">新增</el-button>
+        <el-button type="primary" plain @click="handleAdd" v-hasPermi="['mesProduct:productJob:add']">新增</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button  type="success" plain   :disabled="single" @click="handleUpdate" v-hasPermi="['mesProduct:productJob:edit']">修改</el-button>
+        <el-button type="success" plain :disabled="single" @click="handleUpdate"
+          v-hasPermi="['mesProduct:productJob:edit']">修改</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button  type="danger" plain   :disabled="multiple" @click="handleDelete" v-hasPermi="['mesProduct:productJob:remove']">删除</el-button>
+        <el-button type="danger" plain :disabled="multiple" @click="handleDelete"
+          v-hasPermi="['mesProduct:productJob:remove']">删除</el-button>
       </el-col>
 
     </el-row>
 
     <el-table v-loading="loading" :data="productJobList" @selection-change="handleSelectionChange">
-      <el-table-column type="selection"  align="center"/>
-      <el-table-column label="编号" align="center" prop="id"  />
-      <el-table-column label="作业名称" align="center" prop="name"  width="200" />
-      <el-table-column label="生产计划" align="center" prop="planNo"  width="200" />
-      <el-table-column label="计划排产" align="center" prop="scheduleNo"  width="200" />
-      <el-table-column label="产品" align="center" prop="productName"  width="200" />
-      <el-table-column label="型号" prop="materialModel" width="200" >
+      <el-table-column type="selection" align="center" />
+      <el-table-column label="编号" align="center" prop="id" />
+      <el-table-column label="作业名称" align="center" prop="name" width="200" />
+      <el-table-column label="生产计划" align="center" prop="planNo" width="200" />
+      <el-table-column label="计划排产" align="center" prop="scheduleNo" width="200" />
+      <el-table-column label="产品" align="center" prop="productName" width="200" />
+      <el-table-column label="型号" prop="materialModel" width="200">
       </el-table-column>
-      <el-table-column label="规格" prop="materialSpecification" width="200" >
+      <el-table-column label="规格" prop="materialSpecification" width="200">
       </el-table-column>
-      <el-table-column label="单位" prop="materialUnit" width="200" >
+      <el-table-column label="单位" prop="materialUnit" width="200">
       </el-table-column>
-      <el-table-column label="开始时间" align="center" prop="startTime"  width="200" >
+      <el-table-column label="开始时间" align="center" prop="startTime" width="200">
         <template #default="scope">
           <span>{{ parseTime(scope.row.startTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="结束时间" align="center" prop="endTime"  width="200" >
+      <el-table-column label="结束时间" align="center" prop="endTime" width="200">
         <template #default="scope">
           <span>{{ parseTime(scope.row.endTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="生产数量" align="center" prop="productQuantity"  width="200" />
-      <el-table-column label="作业状态" align="center" prop="status" :formatter="statusFormat"  width="200" />
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width" width="200" >
+      <el-table-column label="生产数量" align="center" prop="productQuantity" width="200" />
+      <el-table-column label="作业状态" align="center" prop="status" :formatter="statusFormat" width="200" />
+      <el-table-column label="操作" align="center" class-name="small-padding fixed-width" width="200">
         <template #default="scope">
-          <el-button  v-if="scope.row.status=='0'" text @click="handleStatus(scope.row,'1')" v-hasPermi="['mesProduct:productJob:edit']">执行</el-button>
-          <el-button  v-if="scope.row.status=='1'" text @click="handleStatus(scope.row,'2')" v-hasPermi="['mesProduct:productJob:edit']">完成</el-button>
-          <el-button  text  @click="handleUpdate(scope.row)" v-hasPermi="['mesProduct:productJob:edit']">修改</el-button>
-          <el-button  v-if="scope.row.status=='0'" text  @click="handleDelete(scope.row)" v-hasPermi="['mesProduct:productJob:remove']">删除</el-button>
+          <el-button v-if="scope.row.status == '0'" type="text" icon="el-icon-caret-right"
+            @click="handleStatus(scope.row, '1')" v-hasPermi="['mesProduct:productJob:edit']">执行</el-button>
+          <el-button v-if="scope.row.status == '1'" type="text" icon="el-icon-finished"
+            @click="handleStatus(scope.row, '2')" v-hasPermi="['mesProduct:productJob:edit']">完成</el-button>
+          <el-button type="text" @click="handleUpdate(scope.row)"
+            v-hasPermi="['mesProduct:productJob:edit']">修改</el-button>
+          <el-button v-if="scope.row.status == '0'" type="text" @click="handleDelete(scope.row)"
+            v-hasPermi="['mesProduct:productJob:remove']">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
 
-    <pagination v-show="total>0" :total="total" v-model:page="queryParams.pageNum" v-model:limit="queryParams.pageSize" @pagination="getList" />
+    <pagination v-show="total > 0" :total="total" v-model:page="queryParams.pageNum"
+      v-model:limit="queryParams.pageSize" @pagination="getList" />
 
     <!-- 添加或修改生产作业对话框 -->
-    <el-dialog :title="title" v-model="open" width="1000px" append-to-body>
+    <el-dialog :title="title" :model-value="open" width="1000px" append-to-body>
+
       <el-form ref="form" :model="form" :rules="rules" label-width="80px" :inline="true">
+
         <el-form-item label="作业名称" prop="name">
           <el-input v-model="form.name" placeholder="请输入作业名称" />
         </el-form-item>
+
         <el-form-item label="生产计划" prop="planNo">
           <el-input v-model="form.planNo" placeholder="" disabled>
-            <template #append><el-button  slot="append" @click="handleSelectSchedule" :disabled="form.auditStatus!='1'&&form.applyStatus!='1'?false:true">选择</el-button></template>
+            <template #append><el-button slot="append" @click="handleSelectSchedule"
+                :disabled="form.auditStatus != '1' && form.applyStatus != '1' ? false : true">选择</el-button>
+            </template>
           </el-input>
         </el-form-item>
+
         <el-form-item label="产品" prop="productName">
           <el-input v-model="form.productName" placeholder="" disabled />
         </el-form-item>
+
         <el-form-item label="规格" prop="materialSpecification">
           <el-input v-model="form.materialSpecification" placeholder="" disabled />
         </el-form-item>
+
         <el-form-item label="型号" prop="materialModel">
           <el-input v-model="form.materialModel" placeholder="" disabled />
         </el-form-item>
+
         <el-form-item label="单位" prop="materialUnit">
           <el-input v-model="form.materialUnit" placeholder="" disabled />
         </el-form-item>
@@ -107,48 +126,66 @@
           <el-input v-model="form.scheduleDate" placeholder="" disabled />
         </el-form-item>
         <el-form-item label="开始时间" prop="startTime">
-          <el-date-picker clearable  v-model="form.startTime" type="datetime" value-format="yyyy-MM-dd HH:mm:ss" placeholder="" disabled>
+          <el-date-picker clearable v-model="form.startTime" type="datetime" value-format="yyyy-MM-dd HH:mm:ss"
+            placeholder="" disabled>
           </el-date-picker>
         </el-form-item>
         <el-form-item label="结束时间" prop="endTime">
-          <el-date-picker clearable  v-model="form.endTime" type="datetime" value-format="yyyy-MM-dd HH:mm:ss" placeholder="" disabled>
+          <el-date-picker clearable v-model="form.endTime" type="datetime" value-format="yyyy-MM-dd HH:mm:ss"
+            placeholder="" disabled>
           </el-date-picker>
         </el-form-item>
         <el-form-item label="作业状态" prop="status">
           <el-select v-model="form.status" placeholder="" clearable filterable disabled>
-            <el-option v-for="dict in statusOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue"></el-option>
+            <el-option v-for="dict in statusOptions" :key="dict.dictValue" :label="dict.dictLabel"
+              :value="dict.dictValue"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="备注" prop="remark">
           <el-input v-model="form.remark" type="textarea" placeholder="请输入内容" />
         </el-form-item>
+
+
+
+
+
         <el-divider content-position="center">生产作业物料信息</el-divider>
-        <el-table :data="mesProductJobMaterialList" :row-class-name="rowMesProductJobMaterialIndex" ref="mesProductJobMaterial">
-          <el-table-column type="selection"  align="center"/>
-          <el-table-column label="序号" align="center" prop="index"   width="200" />
-          <el-table-column label="物料" prop="materialName"  width="200" >
+
+        <el-table :data="mesProductJobMaterialList" :row-class-name="rowMesProductJobMaterialIndex"
+          ref="mesProductJobMaterial">
+          <el-table-column type="selection" align="center" />
+          <el-table-column label="序号" align="center" prop="index" width="200" />
+
+          <el-table-column label="物料" prop="materialName" width="200">
             <template #default="scope">
-              <el-form-item :prop="'mesProductJobMaterialList.'+scope.$index+'.materialName'" :rules="rules.materialName">
+              <el-form-item :prop="'mesProductJobMaterialList.' + scope.$index + '.materialName'"
+                :rules="rules.materialName">
                 <el-input v-model="scope.row.materialName" placeholder="" disabled />
               </el-form-item>
             </template>
           </el-table-column>
-          <el-table-column label="型号" prop="materialModel" width="200" >
+
+          <el-table-column label="型号" prop="materialModel" width="200">
           </el-table-column>
-          <el-table-column label="规格" prop="materialSpecification" width="200" >
+          <el-table-column label="规格" prop="materialSpecification" width="200">
           </el-table-column>
-          <el-table-column label="单位" prop="materialUnit" width="200" >
+          <el-table-column label="单位" prop="materialUnit" width="200">
           </el-table-column>
-          <el-table-column label="消耗数量" prop="usageQuantity"  width="200" >
+
+          <el-table-column label="消耗数量" prop="usageQuantity" width="200">
             <template #default="scope">
-              <el-form-item :prop="'mesProductJobMaterialList.'+scope.$index+'.usageQuantity'" :rules="rules.usageQuantity">
+              <el-form-item :prop="'mesProductJobMaterialList.' + scope.$index + '.usageQuantity'"
+                :rules="rules.usageQuantity">
                 <el-input v-model="scope.row.usageQuantity" placeholder="" disabled />
               </el-form-item>
             </template>
           </el-table-column>
-          <el-table-column label="备注" prop="detailRemark"  width="200" >
+
+
+          <el-table-column label="备注" prop="detailRemark" width="200">
             <template #default="scope">
-              <el-form-item :prop="'mesProductJobMaterialList.'+scope.$index+'.detailRemark'" :rules="rules.detailRemark">
+              <el-form-item :prop="'mesProductJobMaterialList.' + scope.$index + '.detailRemark'"
+                :rules="rules.detailRemark">
                 <el-input v-model="scope.row.detailRemark" placeholder="请输入备注" />
               </el-form-item>
             </template>
@@ -156,11 +193,12 @@
         </el-table>
       </el-form>
       <template #footer class="dialog-footer">
-        <el-button  v-if="form.status=='0'||!form.status" type="primary" @click="submitForm">确 定</el-button>
-        <el-button  @click="cancel">取 消</el-button>
+        <el-button v-if="form.status == '0' || !form.status" type="primary" @click="submitForm">确 定</el-button>
+        <el-button @click="cancel">取 消</el-button>
       </template>
     </el-dialog>
-    <product-schedule-select receiveStatus="1" :open="scheduleOpen" @onSelected="handleScheduleSelected" @onCancel="handleScheduleCancel"></product-schedule-select>
+    <product-schedule-select receiveStatus="1" :open="scheduleOpen" @onSelected="handleScheduleSelected"
+      @onCancel="handleScheduleCancel"></product-schedule-select>
   </div>
 </template>
 

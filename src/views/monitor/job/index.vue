@@ -31,8 +31,8 @@
             </el-select>
          </el-form-item>
          <el-form-item>
-            <el-button type="primary" @click="handleQuery">搜索</el-button>
-            <el-button @click="resetQuery">重置</el-button>
+            <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
+            <el-button icon="Refresh" @click="resetQuery">重置</el-button>
          </el-form-item>
       </el-form>
 
@@ -41,6 +41,7 @@
             <el-button
                type="primary"
                plain
+               icon="Plus"
                @click="handleAdd"
                v-hasPermi="['monitor:job:add']"
             >新增</el-button>
@@ -49,6 +50,7 @@
             <el-button
                type="success"
                plain
+               icon="Edit"
                :disabled="single"
                @click="handleUpdate"
                v-hasPermi="['monitor:job:edit']"
@@ -58,6 +60,7 @@
             <el-button
                type="danger"
                plain
+               icon="Delete"
                :disabled="multiple"
                @click="handleDelete"
                v-hasPermi="['monitor:job:remove']"
@@ -67,6 +70,7 @@
             <el-button
                type="warning"
                plain
+               icon="Download"
                @click="handleExport"
                v-hasPermi="['monitor:job:export']"
             >导出</el-button>
@@ -75,6 +79,7 @@
             <el-button
                type="info"
                plain
+               icon="Operation"
                @click="handleJobLog"
                v-hasPermi="['monitor:job:query']"
             >日志</el-button>
@@ -106,19 +111,19 @@
          <el-table-column label="操作" align="center"  class-name="small-padding fixed-width" width="200" >
             <template #default="scope">
                <el-tooltip content="修改" placement="top">
-                  <el-button link type="primary" @click="handleUpdate(scope.row)" v-hasPermi="['monitor:job:edit']"></el-button>
+                  <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['monitor:job:edit']"></el-button>
                </el-tooltip>
                <el-tooltip content="删除" placement="top">
-                  <el-button link type="primary" @click="handleDelete(scope.row)" v-hasPermi="['monitor:job:remove']"></el-button>
+                  <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['monitor:job:remove']"></el-button>
                </el-tooltip>
                <el-tooltip content="执行一次" placement="top">
-                  <el-button link type="primary" @click="handleRun(scope.row)" v-hasPermi="['monitor:job:changeStatus']"></el-button>
+                  <el-button link type="primary" icon="CaretRight" @click="handleRun(scope.row)" v-hasPermi="['monitor:job:changeStatus']"></el-button>
                </el-tooltip>
                <el-tooltip content="任务详细" placement="top">
-                  <el-button link type="primary" @click="handleView(scope.row)" v-hasPermi="['monitor:job:query']"></el-button>
+                  <el-button link type="primary" icon="View" @click="handleView(scope.row)" v-hasPermi="['monitor:job:query']"></el-button>
                </el-tooltip>
                <el-tooltip content="调度日志" placement="top">
-                  <el-button link type="primary" @click="handleJobLog(scope.row)" v-hasPermi="['monitor:job:query']"></el-button>
+                  <el-button link type="primary" icon="Operation" @click="handleJobLog(scope.row)" v-hasPermi="['monitor:job:query']"></el-button>
                </el-tooltip>
             </template>
          </el-table-column>
@@ -133,7 +138,7 @@
       />
 
       <!-- 添加或修改定时任务对话框 -->
-      <el-dialog :title="title" v-model="open" width="820px" append-to-body>
+      <el-dialog :title="title" :model-value="open" width="820px" append-to-body>
          <el-form ref="jobRef" :model="form" :rules="rules" label-width="120px">
             <el-row>
                <el-col :span="12">
@@ -162,7 +167,7 @@
                               <template #content>
                                  <div>
                                     Bean调用示例：ryTask.ryParams('ry')
-                                    <br />Class类调用示例：com.neuedu.quartz.task.RyTask.ryParams('ry')
+                                    <br />Class类调用示例：com.ruoyi.quartz.task.RyTask.ryParams('ry')
                                     <br />参数说明：支持字符串，布尔类型，长整型，浮点型，整型
                                  </div>
                               </template>
